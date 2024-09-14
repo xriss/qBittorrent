@@ -609,7 +609,7 @@ void RSS::Private::Parser::parseRssArticle(QXmlStreamReader &xml)
     while (!xml.atEnd())
     {
         xml.readNext();
-        const QString name(xml.name().toString());
+        const QString name(xml.name().toString().toLower());
 
         if (xml.isEndElement() && (name == u"item"))
             break;
@@ -639,7 +639,7 @@ void RSS::Private::Parser::parseRssArticle(QXmlStreamReader &xml)
             {
                 article[Article::KeyDescription] = xml.readElementText(QXmlStreamReader::IncludeChildElements);
             }
-            else if (name == u"pubDate")
+            else if (name == u"pubdate")
             {
                 article[Article::KeyDate] = parseDate(xml.readElementText().trimmed());
             }
